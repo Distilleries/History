@@ -26,7 +26,7 @@ class HistoryServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/../../../config/config.php' => config_path('history.php'),
-            __DIR__.'/../../../lang' => resource_path('lang/vendor/history'),
+           // __DIR__.'/../../../lang' => resource_path('lang/vendor/history'),
         ]);
 
         $this->loadMigrationsFrom(__DIR__.'/../../../database/migrations');
