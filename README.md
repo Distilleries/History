@@ -26,6 +26,11 @@ Copy the package config to your local config with the publish command:
 php artisan vendor:publish --provider="Distilleries\History\HistoryServiceProvider"
 ```
 
+Use the package migration with the command :
+```bash
+php artisan migrate
+```
+
 ## Usage
 
 You may add the trait `Distilleries\History\Models\Traits\ManageHistory` to your models.
