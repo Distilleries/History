@@ -3,7 +3,6 @@
 namespace Distilleries\History\Observers;
 
 use Distilleries\History\Contracts\HistoryModel;
-use Distilleries\History\Models\History;
 use Illuminate\Database\Eloquent\Model;
 
 class HistoryObserver
@@ -68,61 +67,61 @@ class HistoryObserver
 
     public function retrieved(Model $model)
     {
-        $this->storeEvent(History::EVENT_RETRIEVED, $model);
+        $this->storeEvent(HistoryModel::EVENT_RETRIEVED, $model);
     }
 
     public function creating(Model $model)
     {
-        $this->storeEvent(History::EVENT_CREATING, $model);
+        $this->storeEvent(HistoryModel::EVENT_CREATING, $model);
     }
 
     public function created(Model $model)
     {
-        $this->storeEvent(History::EVENT_CREATED, $model);
+        $this->storeEvent(HistoryModel::EVENT_CREATED, $model);
     }
 
     public function updating(Model $model)
     {
-        $this->storeEvent(History::EVENT_UPDATING, $model);
+        $this->storeEvent(HistoryModel::EVENT_UPDATING, $model);
     }
 
     public function updated(Model $model)
     {
-        $this->storeEvent(History::EVENT_UPDATED, $model);
+        $this->storeEvent(HistoryModel::EVENT_UPDATED, $model);
     }
 
     public function saving(Model $model)
     {
-        $this->storeEvent(History::EVENT_SAVING, $model);
+        $this->storeEvent(HistoryModel::EVENT_SAVING, $model);
     }
 
     public function saved(Model $model)
     {
-        $this->storeEvent(History::EVENT_SAVED, $model);
+        $this->storeEvent(HistoryModel::EVENT_SAVED, $model);
     }
 
     public function deleting(Model $model)
     {
-        $this->storeEvent(History::EVENT_DELETING, $model);
+        $this->storeEvent(HistoryModel::EVENT_DELETING, $model);
     }
 
     public function deleted(Model $model)
     {
-        $this->storeEvent(History::EVENT_DELETED, $model);
+        $this->storeEvent(HistoryModel::EVENT_DELETED, $model);
     }
 
     public function forceDeleted(Model $model)
     {
-        $this->storeEvent(History::EVENT_FORCE_DELETED, $model);
+        $this->storeEvent(HistoryModel::EVENT_FORCE_DELETED, $model);
     }
 
     public function restoring(Model $model)
     {
-        $this->storeEvent(History::EVENT_RESTORING, $model);
+        $this->storeEvent(HistoryModel::EVENT_RESTORING, $model);
     }
 
     public function restored(Model $model)
     {
-        $this->storeEvent(History::EVENT_RESTORED, $model);
+        $this->storeEvent(HistoryModel::EVENT_RESTORED, $model);
     }
 }
