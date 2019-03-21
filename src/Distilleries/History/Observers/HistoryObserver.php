@@ -2,6 +2,7 @@
 
 namespace Distilleries\History\Observers;
 
+use Distilleries\History\Contracts\HistoryModel;
 use Distilleries\History\Models\History;
 use Illuminate\Database\Eloquent\Model;
 
@@ -29,7 +30,16 @@ class HistoryObserver
             ]);
         }
 
-        History::create($data);
+        /** @var \Illuminate\Database\Eloquent\Model $history */
+        $history = config('history.model');
+        $history = new $history;
+
+        if (! ($history instanceof HistoryModel)) {
+            throw new \RuntimeException(config('history.model') . ' should be instance of ' . get_class(HistoryModel::class));
+        }
+
+        $history->fill($data);
+        $history->save();
     }
 
     protected function getModelsChanges(string $event, Model $model): ?array
