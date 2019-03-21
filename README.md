@@ -30,6 +30,27 @@ php artisan vendor:publish --provider="Distilleries\History\HistoryServiceProvid
 
 You may add the trait `Distilleries\History\Models\Traits\ManageHistory` to your models.
 
+History can be found using the model `Distilleries\History\Models\History`.
+
+```php
+use Distilleries\History\Models\History;
+
+$log = History::query()->first()
+$log->model; // Any of you models
+$log->author; // null or any model that can be used to authenticated (e.g. App\User)
+```
+
+| attribute     | Type           | Description                                                                                                              |
+|---------------|----------------|--------------------------------------------------------------------------------------------------------------------------|
+| type          | string         | The eloquent event name.                                                                                                 |
+| model_id      | integer        | The related model identifier.                                                                                            |
+| model_type    | string         | The related model fully qualified class name.                                                                            |
+| author_id     | integer        | The event author identifier.                                                                                             |
+| author_type   | string         | The event author fully qualified class name.                                                                             |
+| model_changes | array          | The model changes (without hidden attributes). Example : ```['title' => ['old' => 'Old title','new' => 'New title,],]``` |
+| created_at    | \Carbon\Carbon | The history created at.                                                                                                  |
+
+
 ### Events
 
 By default, `created`, `updated`, `deleted` and `restored` events are logged. You can managed logged events with the `events` array of the configuration file (config/history.php).
