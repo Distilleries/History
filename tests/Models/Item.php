@@ -11,5 +11,10 @@ class Item extends Model
 
     protected $fillable = [
         'title',
+        'password',
+    ];
+
+    protected $hidden = [
+        'password',
     ];
 }

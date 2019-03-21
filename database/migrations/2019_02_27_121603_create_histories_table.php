@@ -20,6 +20,7 @@ class CreateHistoriesTable extends Migration
             $table->string('model_type');
             $table->unsignedInteger('author_id')->nullable();
             $table->string('author_type')->nullable();
+            $table->longText('model_changes')->nullable();
             $table->timestamp('created_at', 0)->nullable();
         });
     }

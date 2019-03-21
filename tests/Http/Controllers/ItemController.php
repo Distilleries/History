@@ -27,26 +27,24 @@ class ItemController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'title' => 'required',
+        $data = $this->validate($request, [
+            'title'    => 'required',
+            'password' => 'required',
         ]);
 
-        $item = Item::create([
-            'title' => $request->input('title'),
-        ]);
+        $item = Item::create($data);
 
         return response()->json($item);
     }
 
     public function update(Request $request, Item $item)
     {
-        $this->validate($request, [
-            'title' => 'required',
+        $data = $this->validate($request, [
+            'title'    => 'required',
+            'password' => 'required',
         ]);
 
-        $item->update([
-            'title' => $request->input('title'),
-        ]);
+        $item->update($data);
 
         return response()->json($item);
     }

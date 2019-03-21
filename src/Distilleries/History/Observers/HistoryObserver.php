@@ -14,9 +14,10 @@ class HistoryObserver
         }
 
         $data = [
-            'type'       => $event,
-            'model_id'   => $model->getKey(),
-            'model_type' => get_class($model),
+            'type'          => $event,
+            'model_id'      => $model->getKey(),
+            'model_type'    => get_class($model),
+            'model_changes' => $this->getModelsChanges($event, $model),
         ];
 
         $author = request()->user();
@@ -29,6 +30,30 @@ class HistoryObserver
         }
 
         History::create($data);
+    }
+
+    protected function getModelsChanges(string $event, Model $model): ?array
+    {
+        if (! in_array($event, config('history.log', [])) || ! $model->isDirty()) {
+            return null;
+        }
+
+        $old = $model->getOriginal();
+        $hidden = $model->getHidden();
+
+        return collect($model->getDirty($model->getVisible()))
+            ->filter(function ($value, $attribute) use ($hidden) {
+                return ! in_array($attribute, $hidden);
+            })
+            ->mapWithKeys(function ($value, $attribute) use ($old) {
+                return [
+                    $attribute => [
+                        'old' => data_get($old, $attribute),
+                        'new' => $value,
+                    ],
+                ];
+            })
+            ->toArray();
     }
 
     public function retrieved(Model $model)

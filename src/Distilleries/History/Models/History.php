@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
  * @property string         $model_type
  * @property integer        $author_id
  * @property string         $author_type
+ * @property array          $model_changes
  * @property \Carbon\Carbon $created_at
  */
 class History extends Model
@@ -33,12 +34,27 @@ class History extends Model
     const EVENT_DELETED = 'deleted';
     const EVENT_FORCE_DELETED = 'forceDeleted';
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'type',
         'model_id',
         'model_type',
         'author_id',
         'author_type',
+        'model_changes',
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'model_changes' => 'array',
     ];
 
     /**
